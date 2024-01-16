@@ -1,4 +1,9 @@
 CC?=gcc
+
+ifneq (,$(shell which i386-gcc))
+CC=i386-gcc
+endif
+
 CFLAGS?=-g
 BINARIES=map limits
 
@@ -7,10 +12,10 @@ default:
 	make limits
 
 map: map.c
-	i386-gcc $(CFLAGS) map.c recurse.c -o map
+	$(CC) $(CFLAGS) map.c recurse.c -o map
 
 limits: limits.c
-	i386-gcc $(CFLAGS) -Werror -Wall limits.c -o limits
+	$(CC) $(CFLAGS) limits.c -o limits
 
 clean:
 	rm -f $(BINARIES)
